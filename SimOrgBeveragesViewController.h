@@ -12,5 +12,6 @@
 
 @property  NSString *beverage;
 @property  NSString *location;
+@property NSArray *beverages;
 
 @end

@@ -22,27 +22,42 @@
     self = [super init];
     if (self) {
         ASAPIClient *apiClient =
-        
+        [ASAPIClient apiClientWithApplicationID:@"UH6H8NXOF3" apiKey:@"e3d6c06f766618601dee29d8a509ce8b"];
         self.landingPageIndex = [apiClient getIndex:@"landing_beverages"];
         self.fullIndex = [apiClient getIndex:@"beverages"];
     }
     return self;
 }
 
-- (NSArray *)getLandingPageBeveragesWithQuery:(NSString *)beverageQuery yelp:(NSArray *)yelpQuery beverages:(NSMutableArray **) beverages {
+- (void)getLandingPageBeveragesWithQuery:(NSString *)beverageQuery yelp:(NSArray *)yelpQuery tableView:(SimOrgBeveragesViewController *) tableView  {
+    NSMutableArray *beverages = [[NSMutableArray alloc] init];
     ASQuery* query = [ASQuery queryWithFullTextQuery:beverageQuery];
+    query.hitsPerPage = 8;
     [self.landingPageIndex search:query success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
         for (id hit in [result objectForKey:@"hits"]) {
             Beverage *beverage = [[Beverage alloc] init];
-            beverage.Name = [hit objectForKey:@"Name"];
-            NSLog(beverage.Name);
-            [*beverages addObject:beverage];
+            beverage.identifier = [hit objectForKey:@"Identifier"];
+            beverage.name = [hit objectForKey:@"Name"];
+            beverage.type = [hit objectForKey:@"Type"];
+            beverage.price = [hit objectForKey:@"Price"];
+            beverage.rarity = [hit objectForKey:@"Rarity"];
+            beverage.body = [hit objectForKey:@"Body"];
+            beverage.flavor = [hit objectForKey:@"Flavor"];
+            beverage.finish = [hit objectForKey:@"Finish"];
+            beverage.nose = [hit objectForKey:@"Nose"];
+            beverage.intensity = [hit objectForKey:@"Intensity"];
+            beverage.origin = [hit objectForKey:@"Origin"];
+            beverage.houseDistillery = [hit objectForKey:@"House Distillery"];
+            beverage.yelpBusinessIds = [[hit objectForKey:@"Bars"] componentsSeparatedByString:@","];
+            beverage.similarBeverages = [[hit objectForKey:@"YMAL"] componentsSeparatedByString:@","];
+            
+            [beverages addObject:beverage];
         }
+        tableView.beverages = beverages;
+        [tableView.tableView reloadData];
     } failure:^(ASRemoteIndex *index, ASQuery *query, NSString *errorMessage) {
         NSLog(errorMessage);
     }];
-    
-    return *beverages;
 }
 
 @end

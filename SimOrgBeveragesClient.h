@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SimOrgBeveragesViewController.h"
 
 @interface SimOrgBeveragesClient : NSObject
-- (NSArray *)getBeveragesWithQuery:(NSDictionary *)beverageQuery yelp:(NSArray *)yelpQuery;
-
+- (void)getLandingPageBeveragesWithQuery:(NSString *)beverageQuery yelp:(NSArray *)yelpQuery tableView:(SimOrgBeveragesViewController *) tableView;
 @end

@@ -7,13 +7,26 @@
 //
 
 #import "SimOrgBeveragesViewController.h"
-#import "ASAPIClient.h"
+#import "SimOrgBeveragesClient.h"
+#import "Beverage.h"
 
 @interface SimOrgBeveragesViewController ()
-@property NSMutableArray *beverages;
 @end
 
 @implementation SimOrgBeveragesViewController
+
++(SimOrgBeveragesClient*) BEVERAGES_CLIENT
+{
+    static SimOrgBeveragesClient* beveragesClient = nil;
+    
+    static dispatch_once_t oncePredicate;
+    
+    dispatch_once(&oncePredicate, ^{
+        beveragesClient = [[SimOrgBeveragesClient alloc] init];
+    });
+    
+    return beveragesClient;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,20 +39,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    ASAPIClient *apiClient =
-    [ASAPIClient apiClientWithApplicationID:@"UH6H8NXOF3" apiKey:@"e3d6c06f766618601dee29d8a509ce8b"];
-    ASRemoteIndex *index = [apiClient getIndex:@"test_drive"];
-    [index search:[ASQuery queryWithFullTextQuery:@"jim"]
-          success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
-              NSLog(@"Result:%@", result);
-          } failure:nil];
-    
-    self.beverages = [[NSMutableArray alloc] init];
-    
-    [self.beverages addObject:self.beverage];
-    [self.beverages addObject:self.location];
+        [[SimOrgBeveragesViewController BEVERAGES_CLIENT] getLandingPageBeveragesWithQuery:self.beverage yelp:nil tableView: self];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -63,7 +65,9 @@
 {
     static NSString *CellIdentifier = @"beverageCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [self.beverages objectAtIndex:indexPath.row];
+    Beverage *beverage = [self.beverages objectAtIndex:indexPath.row];
+    cell.textLabel.text = beverage.name;
+    cell.detailTextLabel.text = beverage.flavor;
     return cell;
 }
 
@@ -105,7 +109,4 @@
  return YES;
  }
  */
-
-
-
 @end
