@@ -9,5 +9,8 @@
 #import "SimOrgBeveragesClient.h"
 
 @implementation SimOrgBeveragesClient
+- (NSArray *)getBeveragesWithQuery:(NSDictionary *)beverageQuery yelp:(NSArray *)yelpQuery {
+    return nil;
+}
 
 @end

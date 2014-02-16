@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface SimOrgBeveragesClient : NSObject
-- (*NSArray)getBeveragesWithQuery:(NSDictionary)beverageQuery yelp:(NSArray)yelpQuery
+- (NSArray *)getBeveragesWithQuery:(NSDictionary *)beverageQuery yelp:(NSArray *)yelpQuery;
 
 @end
