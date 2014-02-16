@@ -7,10 +7,12 @@
 //
 
 #import "SimOrgBeveragesViewController.h"
+#import "SimOrgBeverageDetailViewController.h"
 #import "SimOrgBeveragesClient.h"
 #import "Beverage.h"
 
 @interface SimOrgBeveragesViewController ()
+@property (weak, nonatomic) IBOutlet UISearchBar *beveragesSearchBar;
 @end
 
 @implementation SimOrgBeveragesViewController
@@ -39,7 +41,11 @@
 
 - (void)viewDidLoad
 {
-        [[SimOrgBeveragesViewController BEVERAGES_CLIENT] getLandingPageBeveragesWithQuery:self.beverage yelp:nil tableView: self];
+
+}
+
+-(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [[SimOrgBeveragesViewController BEVERAGES_CLIENT] getLandingPageBeveragesWithQuery:searchText yelp:nil tableView: self];
 }
 
 
@@ -63,50 +69,50 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"beverageCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"beverageCell";
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if(!cell) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
     Beverage *beverage = [self.beverages objectAtIndex:indexPath.row];
-    cell.textLabel.text = beverage.name;
-    cell.detailTextLabel.text = beverage.flavor;
+    
+    ((UILabel *)[cell viewWithTag:1]).attributedText = beverage.attributedNameString;
+    ((UILabel *)[cell viewWithTag:2]).attributedText = beverage.attributedTypeString;
+    ((UILabel *)[cell viewWithTag:3]).attributedText = beverage.attributedNoseString;
+    ((UILabel *)[cell viewWithTag:4]).attributedText = beverage.attributedFlavorString;
+    ((UILabel *)[cell viewWithTag:5]).attributedText = beverage.attributedFinishString;
+    ((UILabel *)[cell viewWithTag:6]).text = beverage.price;
+    ((UILabel *)[cell viewWithTag:7]).text = beverage.rarity;
+    
     return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 83;
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+-(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(self.searchDisplayController.isActive) {
+        [self performSegueWithIdentifier:@"showBeverageDetail" sender:self];
+    }
+}
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([[segue identifier] isEqualToString:@"showBeverageDetail"]) {
+        NSIndexPath *indexPath = nil;
+        Beverage *beverage = nil;
+        
+        if(self.searchDisplayController.isActive) {
+            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+        }else{
+            indexPath = [self.tableView indexPathForSelectedRow];
+        }
+        beverage = [self.beverages objectAtIndex:indexPath.row];
+        [[segue destinationViewController] setBeverage:beverage];
+    }
+}
 
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 @end

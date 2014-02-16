@@ -10,7 +10,6 @@
 #import "SimOrgBeveragesViewController.h"
 
 @interface SimOrgLandingPageViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *beverageTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationTextField;
 
 @end
@@ -22,8 +21,7 @@
 {
     SimOrgBeveragesViewController *beverageViewController = segue.destinationViewController;
     
-    if(self.beverageTextField.text.length > 0 && self.locationTextField.text.length > 0) {
-        beverageViewController.beverage= self.beverageTextField.text;
+    if(self.locationTextField.text.length > 0) {
         beverageViewController.location = self.locationTextField.text;
     }
     

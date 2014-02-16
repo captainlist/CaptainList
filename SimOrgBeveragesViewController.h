@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SimOrgBeveragesViewController : UITableViewController
+@interface SimOrgBeveragesViewController : UITableViewController<UISearchDisplayDelegate, UISearchBarDelegate>
 
-@property  NSString *beverage;
 @property  NSString *location;
 @property NSArray *beverages;
 
