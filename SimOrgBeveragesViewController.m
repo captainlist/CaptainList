@@ -41,7 +41,7 @@
 
 - (void)viewDidLoad
 {
-
+    
 }
 
 -(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -86,12 +86,24 @@
     ((UILabel *)[cell viewWithTag:5]).attributedText = beverage.attributedFinishString;
     ((UILabel *)[cell viewWithTag:6]).text = beverage.price;
     ((UILabel *)[cell viewWithTag:7]).text = beverage.rarity;
+    if(beverage.age) {
+        NSMutableString *age = beverage.age.stringValue.mutableCopy;
+        [age appendString:@" years"];
+        ((UILabel *)[cell viewWithTag:8]).text = age;
+    }
+    
+    if(beverage.alcoholContent) {
+        NSMutableString *alcoholContent = beverage.alcoholContent.stringValue.mutableCopy;
+        [alcoholContent appendString:@" proof"];
+        ((UILabel *)[cell viewWithTag:9]).text = alcoholContent;
+
+    }
     
     return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 83;
+    return 92;
 }
 
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

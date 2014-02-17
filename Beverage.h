@@ -24,6 +24,8 @@
 @property NSAttributedString *attributedFinishString;
 @property NSString *nose;
 @property NSAttributedString *attributedNoseString;
+@property NSNumber *age;
+@property NSNumber *alcoholContent;
 @property NSString *intensity;
 @property NSString *origin;
 @property NSString *houseDistillery;

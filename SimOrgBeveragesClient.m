@@ -36,7 +36,7 @@
     
     NSMutableArray *beverages = [[NSMutableArray alloc] init];
     ASQuery* query = [ASQuery queryWithFullTextQuery:beverageQuery];
-    query.hitsPerPage = 5;
+    query.queryType = @"prefixAll";
     [self.landingPageIndex search:query success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
         for (id hit in [result objectForKey:@"hits"]) {
             Beverage *beverage = [[Beverage alloc] init];
@@ -53,6 +53,16 @@
             beverage.rarity = [hit objectForKey:@"Rarity"];
             beverage.body = [hit objectForKey:@"Body"];
             
+            if(![[hit objectForKey:@"Age"] isKindOfClass:[NSString class]]) {
+                beverage.age = [hit objectForKey:@"Age"];
+            }
+            
+            if(![[hit objectForKey:@"AlcoholContent"]  isKindOfClass:[NSString class]]) {
+                beverage.alcoholContent = [hit objectForKey:@"AlcoholContent"];
+            }
+            
+            
+            
             beverage.flavor = [hit objectForKey:@"Flavor"];
             beverage.attributedFlavorString = [self getStringFor:@"Flavor" payload:hit];
             
@@ -61,7 +71,6 @@
 
             beverage.nose = [hit objectForKey:@"Nose"];
             beverage.attributedNoseString = [self getStringFor:@"Nose" payload:hit];
-
             beverage.intensity = [hit objectForKey:@"Intensity"];
             beverage.origin = [hit objectForKey:@"Origin"];
             beverage.houseDistillery = [hit objectForKey:@"House Distillery"];
