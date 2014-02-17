@@ -36,46 +36,50 @@
     
     NSMutableArray *beverages = [[NSMutableArray alloc] init];
     ASQuery* query = [ASQuery queryWithFullTextQuery:beverageQuery];
-    query.queryType = @"prefixAll";
     [self.landingPageIndex search:query success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
         for (id hit in [result objectForKey:@"hits"]) {
             Beverage *beverage = [[Beverage alloc] init];
             
-            beverage.identifier = [hit objectForKey:@"Identifier"];
+            beverage.identifier = [hit objectForKey:@"identifier"];
+            beverage.name = [hit objectForKey:@"name"];
+            beverage.attributedNameString = [self getStringFor:@"name" payload:hit];
+            beverage.type = [hit objectForKey:@"type"];
+            beverage.attributedTypeString = [self getStringFor:@"type" payload:hit];
+            beverage.price = [hit objectForKey:@"price"];
+            beverage.rarity = [hit objectForKey:@"rarity"];
+            beverage.body = [hit objectForKey:@"body"];
+            beverage.intensity = [hit objectForKey:@"intensity"];
+            beverage.origin = [hit objectForKey:@"origin"];
+            beverage.houseDistillery = [hit objectForKey:@"houseDistillery"];
+            beverage.yelpBusinessIds = [hit objectForKey:@"yelpBusinessIds"];
             
-            beverage.name = [hit objectForKey:@"Name"];
-            beverage.attributedNameString = [self getStringFor:@"Name" payload:hit];
             
-            beverage.type = [hit objectForKey:@"Type"];
-            beverage.attributedTypeString = [self getStringFor:@"Type" payload:hit];
-
-            beverage.price = [hit objectForKey:@"Price"];
-            beverage.rarity = [hit objectForKey:@"Rarity"];
-            beverage.body = [hit objectForKey:@"Body"];
-            
-            if(![[hit objectForKey:@"Age"] isKindOfClass:[NSString class]]) {
-                beverage.age = [hit objectForKey:@"Age"];
+            if([hit objectForKey:@"age"] != (id)[NSNull null]) {
+                beverage.age = [hit objectForKey:@"age"];
             }
             
-            if(![[hit objectForKey:@"AlcoholContent"]  isKindOfClass:[NSString class]]) {
-                beverage.alcoholContent = [hit objectForKey:@"AlcoholContent"];
+            if([hit objectForKey:@"alcoholContent"] != (id)[NSNull null]) {
+                beverage.alcoholContent = [hit objectForKey:@"alcoholContent"];
             }
             
+            if([hit objectForKey:@"flavor"] != (id)[NSNull null]) {
+                beverage.flavor = [hit objectForKey:@"flavor"];
+                beverage.attributedFlavorString = [self getStringFor:@"flavor" payload:hit];
+            }
             
+            if([hit objectForKey:@"finish"] != (id)[NSNull null]) {
+                beverage.finish = [hit objectForKey:@"finish"];
+                beverage.attributedFinishString = [self getStringFor:@"finish" payload:hit];
+            }
             
-            beverage.flavor = [hit objectForKey:@"Flavor"];
-            beverage.attributedFlavorString = [self getStringFor:@"Flavor" payload:hit];
-            
-            beverage.finish = [hit objectForKey:@"Finish"];
-            beverage.attributedFinishString = [self getStringFor:@"Finish" payload:hit];
-
-            beverage.nose = [hit objectForKey:@"Nose"];
-            beverage.attributedNoseString = [self getStringFor:@"Nose" payload:hit];
-            beverage.intensity = [hit objectForKey:@"Intensity"];
-            beverage.origin = [hit objectForKey:@"Origin"];
-            beverage.houseDistillery = [hit objectForKey:@"House Distillery"];
-            beverage.yelpBusinessIds = [[hit objectForKey:@"Bars"] componentsSeparatedByString:@","];
-            beverage.similarBeverages = [[hit objectForKey:@"YMAL"] componentsSeparatedByString:@","];
+            if([hit objectForKey:@"nose"] != (id)[NSNull null]) {
+                beverage.nose = [hit objectForKey:@"nose"];
+                beverage.attributedNoseString = [self getStringFor:@"nose" payload:hit];
+            }
+        
+            if([hit objectForKey:@"similarBeverages"] != (id)[NSNull null]) {
+                beverage.similarBeverages = [hit objectForKey:@"similarBeverages"];
+            }
             
             [beverages addObject:beverage];
         }
@@ -90,7 +94,7 @@
 }
 
 -(NSAttributedString *) getStringFor:(NSString *) attributeName payload:(NSDictionary *) payload{
-     NSString *markedupString = [[[payload objectForKey:@"_highlightResult"] objectForKey:attributeName] objectForKey:@"value"];
+    NSString *markedupString = [[[payload objectForKey:@"_highlightResult"] objectForKey:attributeName] objectForKey:@"value"];
     NSString *value = [payload objectForKey:attributeName];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:value];
     
@@ -124,5 +128,5 @@
     
     
     return attributedString;
- }
+}
 @end

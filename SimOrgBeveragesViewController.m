@@ -45,7 +45,7 @@
 }
 
 -(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [[SimOrgBeveragesViewController BEVERAGES_CLIENT] getLandingPageBeveragesWithQuery:searchText yelp:nil tableView: self];
+    [[SimOrgBeveragesViewController BEVERAGES_CLIENT] getLandingPageBeveragesWithQuery:searchText yelp:self.yelpResults tableView: self];
 }
 
 
@@ -86,7 +86,7 @@
     ((UILabel *)[cell viewWithTag:5]).attributedText = beverage.attributedFinishString;
     ((UILabel *)[cell viewWithTag:6]).text = beverage.price;
     ((UILabel *)[cell viewWithTag:7]).text = beverage.rarity;
-    if(beverage.age) {
+    if([beverage.age intValue] != 0) {
         NSMutableString *age = beverage.age.stringValue.mutableCopy;
         [age appendString:@" years"];
         ((UILabel *)[cell viewWithTag:8]).text = age;
