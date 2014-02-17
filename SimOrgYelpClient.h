@@ -7,7 +7,7 @@
 //
 
 #import "SimOrgYelpResult.h"
-#import "SimOrgBeveragesViewController.h";
+#import "SimOrgBeveragesViewController.h"
 #import <Foundation/Foundation.h>
 
 @interface SimOrgYelpClient : NSObject

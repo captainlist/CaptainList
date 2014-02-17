@@ -37,6 +37,8 @@
 		03C8CE5218AD20E4002A4BD6 /* ASAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C8CE4C18AD20E4002A4BD6 /* ASAPIClient.m */; };
 		03C8CE5318AD20E4002A4BD6 /* ASQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C8CE4E18AD20E4002A4BD6 /* ASQuery.m */; };
 		03C8CE5418AD20E4002A4BD6 /* ASRemoteIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C8CE5018AD20E4002A4BD6 /* ASRemoteIndex.m */; };
+		801DA09B18B0690900F0AD9F /* SimOrgYelpResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 801DA09A18B0690900F0AD9F /* SimOrgYelpResult.m */; };
+		801DA12018B06C2300F0AD9F /* SimOrgYelpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 801DA11F18B06C2300F0AD9F /* SimOrgYelpClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,10 @@
 		03C8CE4E18AD20E4002A4BD6 /* ASQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASQuery.m; sourceTree = "<group>"; };
 		03C8CE4F18AD20E4002A4BD6 /* ASRemoteIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASRemoteIndex.h; sourceTree = "<group>"; };
 		03C8CE5018AD20E4002A4BD6 /* ASRemoteIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASRemoteIndex.m; sourceTree = "<group>"; };
+		801DA09918B0690900F0AD9F /* SimOrgYelpResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimOrgYelpResult.h; sourceTree = "<group>"; };
+		801DA09A18B0690900F0AD9F /* SimOrgYelpResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimOrgYelpResult.m; sourceTree = "<group>"; };
+		801DA11E18B06C2300F0AD9F /* SimOrgYelpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimOrgYelpClient.h; sourceTree = "<group>"; };
+		801DA11F18B06C2300F0AD9F /* SimOrgYelpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimOrgYelpClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,7 @@
 		036C985418AC778B00332CE4 = {
 			isa = PBXGroup;
 			children = (
+				801DA09818B064A800F0AD9F /* yelp-client */,
 				03C8CE4818AD20E4002A4BD6 /* algoliasearch-client */,
 				03C8CE2B18AD20D4002A4BD6 /* AFNetworking */,
 				036C988F18AC779A00332CE4 /* Main.storyboard */,
@@ -258,6 +265,17 @@
 			path = "algoliasearch-client";
 			sourceTree = "<group>";
 		};
+		801DA09818B064A800F0AD9F /* yelp-client */ = {
+			isa = PBXGroup;
+			children = (
+				801DA09918B0690900F0AD9F /* SimOrgYelpResult.h */,
+				801DA09A18B0690900F0AD9F /* SimOrgYelpResult.m */,
+				801DA11E18B06C2300F0AD9F /* SimOrgYelpClient.h */,
+				801DA11F18B06C2300F0AD9F /* SimOrgYelpClient.m */,
+			);
+			name = "yelp-client";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -362,6 +380,7 @@
 				036C987118AC778B00332CE4 /* SimOrgAppDelegate.m in Sources */,
 				03B07FB718ADE3B700A58D8D /* Beverage.m in Sources */,
 				03C8CE4018AD20D4002A4BD6 /* AFHTTPRequestOperationManager.m in Sources */,
+				801DA12018B06C2300F0AD9F /* SimOrgYelpClient.m in Sources */,
 				03C8CE5118AD20E4002A4BD6 /* ASAPIClient+Network.m in Sources */,
 				03C8CE4418AD20D4002A4BD6 /* AFURLConnectionOperation.m in Sources */,
 				03C8CE3F18AD20D4002A4BD6 /* AFHTTPRequestOperation.m in Sources */,
@@ -370,6 +389,7 @@
 				03C8CE4118AD20D4002A4BD6 /* AFHTTPSessionManager.m in Sources */,
 				03C8CE4218AD20D4002A4BD6 /* AFNetworkReachabilityManager.m in Sources */,
 				03C8CE4618AD20D4002A4BD6 /* AFURLResponseSerialization.m in Sources */,
+				801DA09B18B0690900F0AD9F /* SimOrgYelpResult.m in Sources */,
 				03C8CE4718AD20D4002A4BD6 /* AFURLSessionManager.m in Sources */,
 				03C8CE5318AD20E4002A4BD6 /* ASQuery.m in Sources */,
 				03C8CE5418AD20E4002A4BD6 /* ASRemoteIndex.m in Sources */,
