@@ -8,6 +8,7 @@
 
 #import "SimOrgLandingPageViewController.h"
 #import "SimOrgBeveragesViewController.h"
+#import "SimOrgYelpClient.h"
 
 @interface SimOrgLandingPageViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *locationTextField;
@@ -23,8 +24,8 @@
     
     if(self.locationTextField.text.length > 0) {
         beverageViewController.location = self.locationTextField.text;
+        [SimOrgYelpClient findByLocation:self.locationTextField.text view:beverageViewController];
     }
-    
 }
 
 

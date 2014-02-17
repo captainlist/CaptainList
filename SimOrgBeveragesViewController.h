@@ -12,5 +12,5 @@
 
 @property  NSString *location;
 @property NSArray *beverages;
-
+@property NSArray *yelpResults;
 @end
