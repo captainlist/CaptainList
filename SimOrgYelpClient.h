@@ -12,4 +12,5 @@
 
 @interface SimOrgYelpClient : NSObject
 +(void) findByLocation:(NSString *) location view:(SimOrgBeveragesViewController *) view;
+-(void) findByLocationV2:(NSString *) location view:(SimOrgBeveragesViewController *) view;
 @end

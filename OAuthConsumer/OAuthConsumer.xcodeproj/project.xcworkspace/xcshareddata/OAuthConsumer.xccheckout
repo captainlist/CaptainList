@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2C56D355-BBD0-471A-B268-1F7F1ED448D9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OAuthConsumer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>14E3FC11-7383-4FF8-BB17-FEF7A244C81F</key>
+		<string>https://github.com/captainlist/CaptainList.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OAuthConsumer/OAuthConsumer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>14E3FC11-7383-4FF8-BB17-FEF7A244C81F</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/captainlist/CaptainList.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>14E3FC11-7383-4FF8-BB17-FEF7A244C81F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>14E3FC11-7383-4FF8-BB17-FEF7A244C81F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CaptainList</string>
+		</dict>
+	</array>
+</dict>
+</plist>

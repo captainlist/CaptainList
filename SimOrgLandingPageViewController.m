@@ -24,7 +24,8 @@
     
     if(self.locationTextField.text.length > 0) {
         beverageViewController.location = self.locationTextField.text;
-        [SimOrgYelpClient findByLocation:self.locationTextField.text view:beverageViewController];
+        SimOrgYelpClient *yelpClient = [[SimOrgYelpClient alloc] init];
+        [yelpClient findByLocationV2:self.locationTextField.text view:beverageViewController];
     }
 }
 
